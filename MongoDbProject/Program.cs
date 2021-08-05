@@ -11,9 +11,48 @@ namespace MongoDbProject
         static async Task Main(string[] args)
         {
             Console.WriteLine("");
-            Console.WriteLine("");
+            Console.WriteLine("");          
 
-           
+        }
+
+        private static async Task DeletandoUmDocumento()
+        {
+            var context = new MongoContext();
+            var construtor = Builders<Livro>.Filter;
+
+            var condicao = construtor.Eq(x => x.Titulo, "Guerra dos Tronos");
+
+            var listalivros = await context.Livros.Find(condicao).ToListAsync();
+
+            foreach (var doc in listalivros)
+            {
+                Console.WriteLine(doc.ToJson());
+            }
+
+            await context.Livros.DeleteManyAsync(condicao);
+        }
+
+        private static async Task AlterandoUmDocumentoComUpDate()
+        {
+            var context = new MongoContext();
+            var construtor = Builders<Livro>.Filter;
+
+            var condicao = construtor.Eq(x => x.Titulo, "Guerra dos Tronos");
+
+            var listalivros = await context.Livros.Find(condicao).ToListAsync();
+
+            foreach (var doc in listalivros)
+            {
+                Console.WriteLine(doc.ToJson());               
+            }
+
+            var update = Builders<Livro>.Update;
+            var updateCondicao = update.Set(x => x.Ano, 2001);
+
+            //altera o documento conforme condicao
+            await context.Livros.UpdateOneAsync(condicao, updateCondicao);
+            //altera todos os documentos conforme condicao
+            //await context.Livros.UpdateManyAsync(condicao, updateCondicao);
 
         }
 
