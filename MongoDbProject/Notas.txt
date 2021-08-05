@@ -1,0 +1,47 @@
+﻿>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Anotações mongodb <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+*********************** Criando Container MongoDb *****************************************************
+
+docker pull tutum/mongodb
+
+->criacao sem senha
+docker run --name serv_mongo -d -p 27017:27017 -p 28017:28017 -e AUTH=no tutum/mongodb
+
+->criacao com senha
+docker run --name serv_mongo -d -p 27017:27017 -p 28017:28017 -e MONGODB_PASS="mypass" tutum/mongodb
+
+docker start serv_mongo
+
+docker exec -it serv_mongo sh
+
+***********************  Referencias de Pesquisa ******************************************************
+
+//https://mongodbwise.wordpress.com/2014/05/22/mongodb-guia-rapido/
+//http://paulodutrainfo.com.br/alguns-comandos-basicos-mongodb
+//https://json2csharp.com/
+
+******************************  Comandos **************************************************************
+
+mongod; - subir serviço do mongo
+
+mongo; - shell do mongo
+
+show dbs; - exibir databases
+
+use database_name; - criar database
+
+use database_name; - setar db
+
+db.createCollection('nome-da-collection'); - criar colecao
+
+db.nomedacollection.drop(); - excluir colecao
+
+db.COLLECTION_NAME.find(); - consultar colecao
+
+db.mycol.find().pretty(); - consultar colecao com detalhes
+
+db.COLLECTION_NAME.update(SELECTIOIN_CRITERIA, UPDATED_DATA); - alterar colecao
+
+db.COLLECTION_NAME.insert(document); - inserir documento
+
+db.COLLECTION_NAME.count(); - contar quantidade
